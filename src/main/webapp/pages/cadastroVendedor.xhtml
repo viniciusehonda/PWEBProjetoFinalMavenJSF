@@ -1,0 +1,140 @@
+
+<ui:composition template="templateMenu.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui2="http://java.sun.com/jsf/facelets"
+	xmlns:tm="http://java.sun.com/jsf/composite/terminal/1_0/components">
+	
+	<ui:define name="title">
+		<h:outputText value="#{msg['pages.cadastroVendedor.title']}" />
+	</ui:define>
+	
+
+	<ui:define name="principal">
+	
+	
+    <h1><p:outputLabel value="#{msg['pages.cadastroVendedor.menu']}"/></h1>
+    
+ 	<h:form id="formVendedores">
+		<p:panelGrid columns="2">
+			<p:outputLabel value="#{msg['pages.cadastroVendedor.nome']}" />
+			<p:inputText  value="#{vendedorManagedBean.vendedor.nome}"/>
+			<p:outputLabel value="#{msg['pages.cadastroVendedor.endereco']}" />
+			<p:inputText  value="#{vendedorManagedBean.vendedor.endereco}"/>
+			<p:outputLabel value="#{msg['pages.cadastroVendedor.telefone']}" />
+			<p:inputText  value="#{vendedorManagedBean.vendedor.telefone}"/>
+		</p:panelGrid>
+		<p:commandButton value="#{msg['pages.comuns.form.btnSalvar']}" update=":formVendedores, :formTableVendedores"  action="#{vendedorManagedBean.salvar}"/>
+	</h:form>
+
+    
+    <h3><p:outputLabel value="#{msg['pages.cadastroVendedor.tableTitle']}"/></h3>
+	<h:form id="formTableVendedores">
+	
+	    <p:growl id="growl" showDetail="true" />
+	
+		<p:dataTable value="#{vendedorManagedBean.vendedores}" var="v"
+			editable="true" id="tableProdutos"
+			selectionMode="single" selection="#{vendedorManagedBean.vendedorSelecionado}"  rowKey="#{v.codigo}"
+			>
+
+		   <p:ajax event="rowSelect"   update=":formTableProdutos" />
+           <p:ajax event="rowUnselect" update=":formTableProdutos" />
+           <p:ajax event="rowEdit"     listener="#{vendedorManagedBean.onRowEdit}"     update=":formTableProdutos" /> 
+
+			<p:column headerText="#{msg['pages.cadastroVendedor.codigo']}" filterBy="#{v.codigo}">
+				<h:outputText value="#{v.codigo}" />
+			</p:column>
+
+			<p:column headerText="#{msg['pages.cadastroVendedor.nome']}" filterBy="#{v.nome}">
+				<p:cellEditor>
+					<f:facet name="output">
+						<p:outputLabel value="#{v.nome}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText id="nome" value="#{v.nome}"
+							style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+			
+			<p:column headerText="#{msg['pages.cadastroVendedor.endereco']}" filterBy="#{v.endereco}">
+				<p:cellEditor>
+					<f:facet name="output">
+						<p:outputLabel value="#{v.endereco}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText id="endereco" value="#{v.endereco}"
+							style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+			
+			<p:column headerText="#{msg['pages.cadastroVendedor.telefone']}" filterBy="#{v.telefone}">
+				<p:cellEditor>
+					<f:facet name="output">
+						<p:outputLabel value="#{v.telefone}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText id="telefone" value="#{v.telefone}"
+							style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column style="width:70px" headerText="#{msg['pages.commus.form.opcoes']}">
+					<p:rowEditor />
+					<p:commandLink id="remover" styleClass="ui-icon ui-icon-trash"
+						style="text-align:center"
+						actionListener="#{vendedorManagedBean.remove(v)}"
+						update=":formTableVendedores" />
+			</p:column>
+
+		</p:dataTable>
+	</h:form>
+
+    <br/>
+    <h:form id="formTableProdutos">
+	    <h3><p:outputLabel value="#{msg['pages.cadastroVendedor.produtosVendedor']}: #{vendedorManagedBean.vendedorSelecionado.nome}" /></h3>
+	    <h:commandLink>
+                <p:graphicImage name="/sistema/iconesimg/iconepdf.png" width="24"/>
+                <p:dataExporter type="pdf" encoding="iso-8859-1" target="tableProdutos" fileName="#{msg['pages.cadastroVendedor.vendas']}"/>
+        </h:commandLink>
+        <h:commandLink>
+                <p:graphicImage name="/sistema/iconesimg/iconeexcel.png" width="24"/>
+                <p:dataExporter type="xls" encoding="iso-8859-1" target="tableProdutos" fileName="#{msg['pages.cadastroVendedor.vendas']}"/>
+        </h:commandLink>
+		<p:dataTable value="#{vendedorManagedBean.produtosVendedor}" var="prod"	id="tableProdutos"
+			rowKey="#{prod.codigo}"
+			paginator="true"
+            rows="5"
+            paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+            rowsPerPageTemplate="5,10,15"
+                
+            emptyMessage="#{msg['pages.cadastroVendedor.filterMSG']}"
+		>
+
+			<p:column headerText="#{msg['pages.cadastroVendedor.produto.codigo']}" filterBy="#{prod.codigo}" exportable="false">
+				<h:outputText value="#{prod.codigo}" />
+			</p:column>
+			
+			<p:column headerText="#{msg['pages.cadastroVendedor.produto.nome']}" filterBy="#{prod.nome}">
+						<p:outputLabel value="#{prod.nome}" />
+			</p:column>
+
+			<p:column headerText="#{msg['pages.cadastroVendedor.produto.descricao']}" filterBy="#{prod.descricao}">
+						<p:outputLabel value="#{prod.descricao}" />
+			</p:column>
+
+			<p:column headerText="#{msg['pages.cadastroVendedor.produto.valor']}" filterBy="#{prod.valor}">
+				<h:outputText value="#{prod.valor}" />
+			</p:column>
+
+		</p:dataTable>
+	</h:form>
+
+	</ui:define>
+</ui:composition>

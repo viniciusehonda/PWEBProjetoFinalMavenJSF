@@ -5,6 +5,7 @@ import java.util.List;
 
 import sistema.dao.ClienteDAO;
 import sistema.modelos.Cliente;
+import sistema.modelos.Pedido;
 
 
 public class ClienteService {
@@ -43,5 +44,13 @@ public class ClienteService {
 		cliente = clienteDAO.getById(Cliente.class, cliente.getId());
 		clienteDAO.closeEntityManager();
 		return cliente;
+	}
+	
+	public List<Pedido> pesquisarPedidosCliente(Cliente cliente) {
+
+		List<Pedido> pedidos;
+		cliente = clienteDAO.getById(Cliente.class, cliente.getId());
+		pedidos = cliente.getPedidos();
+		return pedidos;
 	}
 }

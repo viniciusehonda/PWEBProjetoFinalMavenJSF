@@ -7,133 +7,166 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui2="http://java.sun.com/jsf/facelets"
 	xmlns:tm="http://java.sun.com/jsf/composite/terminal/1_0/components">
-	
+
 	<ui:define name="title">
 		<h:outputText value="#{msg['pages.cadastroCliente.title']}" />
 	</ui:define>
-	
+
 
 	<ui:define name="principal">
-	  
-	  <h1><p:outputLabel value="#{msg['pages.cadastroCliente.menu']}"/></h1>
-	  
-	  <h:form id="formCliente">	
-	  <p:panelGrid columns="2">
-      <p:outputLabel value="#{msg['pages.cadastroCliente.nome']}" />
-      <p:inputText value="#{clienteManagedBean.cliente.nome}"/>
-      <p:outputLabel value="#{msg['pages.cadastroCliente.endereco']}" />
-      <p:inputText value="#{clienteManagedBean.cliente.endereco}"/>
-      <p:outputLabel value="#{msg['pages.cadastroCliente.cpf_cnpj']}" />
-      <p:inputText value="#{clienteManagedBean.cliente.cpf_cnpj}"/>
-      <p:outputLabel value="#{msg['pages.cadastroCliente.telefone']}" />
-      <p:inputText value="#{clienteManagedBean.cliente.telefone}"/>
-	  </p:panelGrid>
-	  <p:commandButton value="#{msg['pages.comuns.form.btnSalvar']}" 
-	                 action="#{clienteManagedBean.salvar}"
-	                 update=":formCliente, :formTableCliente:tabelaCliente"
-	                 />
-       </h:form>
 
-   <br/>
-   
-   
-   <h3><p:outputLabel value="#{msg['pages.cadastroCliente.tableTitle']}" /> </h3>
-   <h:form id="formTableCliente">
-   
-    <p:dataTable
-                value="#{clienteManagedBean.clientes}"
-                var="aux"
-                id="tabelaCliente"
-            
-                editable="true"
-            
-                paginator="true"
-                rows="5"
-                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                rowsPerPageTemplate="5,10,15"
-                
-                emptyMessage="#{msg['pages.cadastroCliente.filterMSG']}"
-                
-   >
-      
-      <p:ajax event="rowEdit" listener="#{clienteManagedBean.onRowEdit}" update="tabelaCliente" />
-      
-      <p:column headerText="#{msg['pages.cadastroCliente.id']}" filterBy="#{aux.id}">
-        <p:outputLabel value="#{aux.id}" />
-      </p:column>
-      
-      
-      
-      <p:column headerText="#{msg['pages.cadastroCliente.nome']}" filterBy="#{aux.nome}">
-    
-    			<p:cellEditor>
-					<f:facet name="output">
-						<p:outputLabel value="#{aux.nome}" />
-					</f:facet>
-					<f:facet name="input">
-						<p:inputText id="clienteNome" value="#{aux.nome}"
-							style="width:100%" />
-					</f:facet>
-				</p:cellEditor>
-	  </p:column>
-    
-      <p:column headerText="#{msg['pages.cadastroCliente.endereco']}" filterBy="#{aux.endereco}">
-     
-     			<p:cellEditor>
-					<f:facet name="output">
-						<p:outputLabel value="#{aux.endereco}" />
-					</f:facet>
-					<f:facet name="input">
-						<p:inputText id="clienteEndereco" value="#{aux.endereco}"
-							style="width:100%" />
-					</f:facet>
-				</p:cellEditor>
-      </p:column>
-      
-      <p:column headerText="#{msg['pages.cadastroCliente.cpf_cnpj']}" filterBy="#{aux.cpf_cnpj}">
-     
-     			<p:cellEditor>
-					<f:facet name="output">
-						<p:outputLabel value="#{aux.cpf_cnpj}" />
-					</f:facet>
-					<f:facet name="input">
-						<p:inputText id="clienteCpf_cnpj" value="#{aux.cpf_cnpj}"
-							style="width:100%" />
-					</f:facet>
-				</p:cellEditor>
-      </p:column>
-      
-      <p:column headerText="#{msg['pages.cadastroCliente.telefone']}" filterBy="#{aux.telefone}">
-     
-     			<p:cellEditor>
-					<f:facet name="output">
-						<p:outputLabel value="#{aux.telefone}" />
-					</f:facet>
-					<f:facet name="input">
-						<p:inputText id="clienteTelefone" value="#{aux.telefone}"
-							style="width:100%" />
-					</f:facet>
-				</p:cellEditor>
-      </p:column>
-      
-      <p:column style="width:70px" headerText="#{msg['pages.cadastroCliente.optionTable']}">
-					
+		<h1>
+			<p:outputLabel value="#{msg['pages.cadastroCliente.menu']}" />
+		</h1>
+
+		<h:form id="formCliente">
+			<p:panelGrid columns="2">
+				<p:outputLabel value="#{msg['pages.cadastroCliente.nome']}" />
+				<p:inputText value="#{clienteManagedBean.cliente.nome}" />
+				<p:outputLabel value="#{msg['pages.cadastroCliente.endereco']}" />
+				<p:inputText value="#{clienteManagedBean.cliente.endereco}" />
+				<p:outputLabel value="#{msg['pages.cadastroCliente.cpf_cnpj']}" />
+				<p:inputText value="#{clienteManagedBean.cliente.cpf_cnpj}" />
+				<p:outputLabel value="#{msg['pages.cadastroCliente.telefone']}" />
+				<p:inputText value="#{clienteManagedBean.cliente.telefone}" />
+			</p:panelGrid>
+			<p:commandButton value="#{msg['pages.comuns.form.btnSalvar']}"
+				action="#{clienteManagedBean.salvar}"
+				update=":formCliente, :formTableCliente:tabelaCliente" />
+		</h:form>
+
+		<br />
+
+
+		<h3>
+			<p:outputLabel value="#{msg['pages.cadastroCliente.tableTitle']}" />
+		</h3>
+		<h:form id="formTableCliente">
+
+			<p:dataTable value="#{clienteManagedBean.clientes}" var="aux"
+				id="tabelaCliente" editable="true" paginator="true" rows="5"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5,10,15"
+				emptyMessage="#{msg['pages.cadastroCliente.filterMSG']}"
+				selectionMode="single" selection="#{clienteManagedBean.clienteSelecionado}"  rowKey="#{aux.id}">
+
+				<p:ajax event="rowEdit" listener="#{clienteManagedBean.onRowEdit}"
+					update="tabelaCliente" />
+
+				<p:column headerText="#{msg['pages.cadastroCliente.id']}"
+					filterBy="#{aux.id}">
+					<p:outputLabel value="#{aux.id}" />
+				</p:column>
+
+
+
+				<p:column headerText="#{msg['pages.cadastroCliente.nome']}"
+					filterBy="#{aux.nome}">
+
+					<p:cellEditor>
+						<f:facet name="output">
+							<p:outputLabel value="#{aux.nome}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText id="clienteNome" value="#{aux.nome}"
+								style="width:100%" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="#{msg['pages.cadastroCliente.endereco']}"
+					filterBy="#{aux.endereco}">
+
+					<p:cellEditor>
+						<f:facet name="output">
+							<p:outputLabel value="#{aux.endereco}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText id="clienteEndereco" value="#{aux.endereco}"
+								style="width:100%" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="#{msg['pages.cadastroCliente.cpf_cnpj']}"
+					filterBy="#{aux.cpf_cnpj}">
+
+					<p:cellEditor>
+						<f:facet name="output">
+							<p:outputLabel value="#{aux.cpf_cnpj}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText id="clienteCpf_cnpj" value="#{aux.cpf_cnpj}"
+								style="width:100%" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="#{msg['pages.cadastroCliente.telefone']}"
+					filterBy="#{aux.telefone}">
+
+					<p:cellEditor>
+						<f:facet name="output">
+							<p:outputLabel value="#{aux.telefone}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText id="clienteTelefone" value="#{aux.telefone}"
+								style="width:100%" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column style="width:70px"
+					headerText="#{msg['pages.cadastroCliente.optionTable']}">
+
 					<p:rowEditor />
-					
+
 					<p:commandLink id="remover" styleClass="ui-icon ui-icon-trash"
 						style="text-align:center"
 						actionListener="#{clienteManagedBean.remover(aux)}"
 						update="tabelaCliente" />
-	  </p:column>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+<h:form id="formTablePedidos">
+	    <h3><p:outputLabel value="#{msg['pages.cadastroCliente.pedidosCliente']}: #{clienteManagedBean.clienteSelecionado.nome}" /></h3>
+	    <h:commandLink>
+                <p:graphicImage name="/sistema/iconesimg/iconepdf.png" width="24"/>
+                <p:dataExporter type="pdf" encoding="iso-8859-1" target="tablePedidos" fileName="#{msg['pages.cadastroCliente.vendas']}"/>
+        </h:commandLink>
+        <h:commandLink>
+                <p:graphicImage name="/sistema/iconesimg/iconeexcel.png" width="24"/>
+                <p:dataExporter type="xls" encoding="iso-8859-1" target="tablePedidos" fileName="#{msg['pages.cadastroCliente.vendas']}"/>
+        </h:commandLink>
+		
+		<p:dataTable value="#{clienteManagedBean.pedidosCliente}" var="ped"	id="tablePedidos"
+			rowKey="#{ped.id}"
+			paginator="true"
+            rows="5"
+            paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+            rowsPerPageTemplate="5,10,15"
+                
+            emptyMessage="#{msg['pages.cadastroCliente.filterMSG']}"
+		>
 
-      
-      
-   </p:dataTable>	
+			<p:column headerText="#{msg['pages.cadastroCliente.pedido.id']}" filterBy="#{ped.codigo}" exportable="false">
+				<h:outputText value="#{ped.codigo}" />
+			</p:column>
+			
+			<p:column headerText="#{msg['pages.cadastroCliente.pedido.dataEmissaoPedido']}" filterBy="#{ped.dataEmissaoPedido}">
+						<p:outputLabel value="#{ped.dataEmissaoPedido}" />
+			</p:column>
 
+			<p:column headerText="#{msg['pages.cadastroCliente.pedido.dataPagto']}" filterBy="#{ped.dataPagto}">
+						<p:outputLabel value="#{ped.dataPagto}" />
+			</p:column>
+
+			<p:column headerText="#{msg['pages.cadastroCliente.pedido.status']}" filterBy="#{ped.status}">
+				<h:outputText value="#{ped.status}" />
+			</p:column>
+
+		</p:dataTable>
 	</h:form>
-
-	
-   	   
 	</ui:define>
 </ui:composition>
 

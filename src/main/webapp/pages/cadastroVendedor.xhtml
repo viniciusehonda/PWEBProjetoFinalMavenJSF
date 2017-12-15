@@ -97,18 +97,18 @@
 	</h:form>
 
     <br/>
-    <h:form id="formTableProdutos">
-	    <h3><p:outputLabel value="#{msg['pages.cadastroVendedor.produtosVendedor']}: #{vendedorManagedBean.vendedorSelecionado.nome}" /></h3>
+    <h:form id="formTablePedidos">
+	    <h3><p:outputLabel value="#{msg['pages.cadastroVendedor.pedidosVendedor']}: #{vendedorManagedBean.vendedorSelecionado.nome}" /></h3>
 	    <h:commandLink>
                 <p:graphicImage name="/sistema/iconesimg/iconepdf.png" width="24"/>
-                <p:dataExporter type="pdf" encoding="iso-8859-1" target="tableProdutos" fileName="#{msg['pages.cadastroVendedor.vendas']}"/>
+                <p:dataExporter type="pdf" encoding="iso-8859-1" target="tablePedidos" fileName="#{msg['pages.cadastroVendedor.vendas']}"/>
         </h:commandLink>
         <h:commandLink>
                 <p:graphicImage name="/sistema/iconesimg/iconeexcel.png" width="24"/>
-                <p:dataExporter type="xls" encoding="iso-8859-1" target="tableProdutos" fileName="#{msg['pages.cadastroVendedor.vendas']}"/>
+                <p:dataExporter type="xls" encoding="iso-8859-1" target="tablePedidos" fileName="#{msg['pages.cadastroVendedor.vendas']}"/>
         </h:commandLink>
-		<p:dataTable value="#{vendedorManagedBean.produtosVendedor}" var="prod"	id="tableProdutos"
-			rowKey="#{prod.codigo}"
+		<p:dataTable value="#{vendedorManagedBean.pedidosVendedor}" var="ped"	id="tablePedidos"
+			rowKey="#{ped.id}"
 			paginator="true"
             rows="5"
             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -117,20 +117,20 @@
             emptyMessage="#{msg['pages.cadastroVendedor.filterMSG']}"
 		>
 
-			<p:column headerText="#{msg['pages.cadastroVendedor.produto.codigo']}" filterBy="#{prod.codigo}" exportable="false">
-				<h:outputText value="#{prod.codigo}" />
+			<p:column headerText="#{msg['pages.cadastroVendedor.pedido.id']}" filterBy="#{ped.codigo}" exportable="false">
+				<h:outputText value="#{ped.codigo}" />
 			</p:column>
 			
-			<p:column headerText="#{msg['pages.cadastroVendedor.produto.nome']}" filterBy="#{prod.nome}">
-						<p:outputLabel value="#{prod.nome}" />
+			<p:column headerText="#{msg['pages.cadastroVendedor.pedido.dataEmissaoPedido']}" filterBy="#{ped.dataEmissaoPedido}">
+						<p:outputLabel value="#{ped.dataEmissaoPedido}" />
 			</p:column>
 
-			<p:column headerText="#{msg['pages.cadastroVendedor.produto.descricao']}" filterBy="#{prod.descricao}">
-						<p:outputLabel value="#{prod.descricao}" />
+			<p:column headerText="#{msg['pages.cadastroVendedor.pedido.dataPagto']}" filterBy="#{ped.dataPagto}">
+						<p:outputLabel value="#{ped.dataPagto}" />
 			</p:column>
 
-			<p:column headerText="#{msg['pages.cadastroVendedor.produto.valor']}" filterBy="#{prod.valor}">
-				<h:outputText value="#{prod.valor}" />
+			<p:column headerText="#{msg['pages.cadastroVendedor.pedido.status']}" filterBy="#{ped.status}">
+				<h:outputText value="#{ped.status}" />
 			</p:column>
 
 		</p:dataTable>

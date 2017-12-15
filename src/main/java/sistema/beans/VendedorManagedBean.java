@@ -73,7 +73,7 @@ public class VendedorManagedBean {
 		this.vendedor = vendedor;
 	}
 
-	public List<Pedido> getProdutosVendedor() {
+	public List<Pedido> getPedidosVendedor() {
 		if (vendedorSelecionado != null) {
 			return servico.pesquisarPedidosVendedor(vendedorSelecionado);
 		} else

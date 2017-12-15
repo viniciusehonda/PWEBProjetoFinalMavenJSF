@@ -6,6 +6,7 @@ import javax.faces.bean.ViewScoped;
 import org.primefaces.event.RowEditEvent;
 
 import sistema.modelos.Cliente;
+import sistema.modelos.Pedido;
 import sistema.service.ClienteService;
 
 @ManagedBean
@@ -13,14 +14,24 @@ import sistema.service.ClienteService;
 public class ClienteManagedBean {
 
 	private Cliente cliente = new Cliente();
+	private Cliente clienteSelecionado;
 	private List<Cliente> clientes;
 	private ClienteService service = new ClienteService();
 
 	// Edição de um cliente na tabela
+	
 	public void onRowEdit(RowEditEvent event) {
 
 		Cliente c = ((Cliente) event.getObject());
 		service.alterar(c);
+	}
+
+	public Cliente getClienteSelecionado() {
+		return clienteSelecionado;
+	}
+
+	public void setClienteSelecionado(Cliente clienteSelecionado) {
+		this.clienteSelecionado = clienteSelecionado;
 	}
 
 	public void salvar() {
@@ -54,5 +65,11 @@ public class ClienteManagedBean {
 		clientes.remove(cliente);
 
 	}
-
+	
+	public List<Pedido> getPedidosCliente() {
+		if (clienteSelecionado != null) {
+			return service.pesquisarPedidosCliente(clienteSelecionado);
+		} else
+			return null;
+	}
 }

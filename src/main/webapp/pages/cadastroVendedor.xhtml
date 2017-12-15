@@ -37,13 +37,13 @@
 	    <p:growl id="growl" showDetail="true" />
 	
 		<p:dataTable value="#{vendedorManagedBean.vendedores}" var="v"
-			editable="true" id="tableProdutos"
+			editable="true" id="tableVendedores"
 			selectionMode="single" selection="#{vendedorManagedBean.vendedorSelecionado}"  rowKey="#{v.codigo}"
 			>
 
-		   <p:ajax event="rowSelect"   update=":formTableProdutos" />
-           <p:ajax event="rowUnselect" update=":formTableProdutos" />
-           <p:ajax event="rowEdit"     listener="#{vendedorManagedBean.onRowEdit}"     update=":formTableProdutos" /> 
+		   <p:ajax event="rowSelect"   update=":formTableVendedores" />
+           <p:ajax event="rowUnselect" update=":formTableVendedores" />
+           <p:ajax event="rowEdit"     listener="#{vendedorManagedBean.onRowEdit}"     update=":formTableVendedores" /> 
 
 			<p:column headerText="#{msg['pages.cadastroVendedor.codigo']}" filterBy="#{v.codigo}">
 				<h:outputText value="#{v.codigo}" />

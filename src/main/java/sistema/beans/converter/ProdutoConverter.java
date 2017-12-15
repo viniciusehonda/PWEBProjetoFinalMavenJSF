@@ -10,7 +10,8 @@ import sistema.service.ProdutoService;
 
 @FacesConverter("converterProduto")
 public class ProdutoConverter implements Converter {
-private ProdutoService servico = new ProdutoService();
+	
+	private ProdutoService servico = new ProdutoService();
 	
 	@Override
 	public Object getAsObject(FacesContext fc, UIComponent uic, String value) {

@@ -34,8 +34,8 @@ public class VendedorDataModel extends ListDataModel<Vendedor> implements Select
 	}
 
 	@Override
-	public Object getRowKey(Vendedor fornecedor) {
-		return fornecedor.getCodigo();
+	public Object getRowKey(Vendedor vendedor) {
+		return vendedor.getCodigo();
 	}
 	
 }

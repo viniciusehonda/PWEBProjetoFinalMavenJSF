@@ -2,13 +2,9 @@ package sistema.service;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-
 import sistema.dao.VendedorDAO;
-import sistema.modelos.Cliente;
+import sistema.modelos.Pedido;
 import sistema.modelos.Vendedor;
-import sistema.modelos.Produto;
 
 public class VendedorService {
 
@@ -48,12 +44,12 @@ public class VendedorService {
 		return vendedor;
 	}
 
-	public List<Produto> pesquisarProdutosVendedor(Vendedor vendedor) {
+	public List<Pedido> pesquisarPedidosVendedor(Vendedor vendedor) {
 
-		List<Produto> produtos;
+		List<Pedido> pedidos;
 		vendedor = vendedorDAO.getById(Vendedor.class, vendedor.getCodigo());
-		produtos = vendedor.getProdutos();
-		return produtos;
+		pedidos = vendedor.getPedidos();
+		return pedidos;
 	}
 
 	

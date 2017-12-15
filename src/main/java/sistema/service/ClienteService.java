@@ -2,8 +2,6 @@ package sistema.service;
 
 
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 import sistema.dao.ClienteDAO;
 import sistema.modelos.Cliente;
@@ -40,5 +38,10 @@ public class ClienteService {
 		clienteDAO.remove(cliente);
 		clienteDAO.closeEntityManager();
 	}
-	
+	public Cliente pesquisar(Cliente cliente) {
+
+		cliente = clienteDAO.getById(Cliente.class, cliente.getId());
+		clienteDAO.closeEntityManager();
+		return cliente;
+	}
 }

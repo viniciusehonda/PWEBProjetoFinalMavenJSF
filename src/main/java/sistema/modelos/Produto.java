@@ -1,13 +1,14 @@
 package sistema.modelos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Produto implements Serializable{
@@ -17,31 +18,23 @@ public class Produto implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long codigo;
-	private String nome;
 	private String descricao;
 	private double valor;
 	
-	@ManyToOne
-	private Vendedor vendedor;
+	@ManyToMany
+	private List<Pedido> pedidos = new ArrayList<Pedido>();
 	
-	
-	public Vendedor getVendedor() {
-		return vendedor;
+	public List<Pedido> getPedidos() {
+		return pedidos;
 	}
-	public void setVendedor(Vendedor vendedor) {
-		this.vendedor = vendedor;
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 	public long getCodigo() {
 		return codigo;
 	}
 	public void setCodigo(long codigo) {
 		this.codigo = codigo;
-	}
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 	public String getDescricao() {
 		return descricao;
@@ -61,7 +54,6 @@ public class Produto implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + (int) (codigo ^ (codigo >>> 32));
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(valor);
@@ -79,11 +71,6 @@ public class Produto implements Serializable{
 			return false;
 		Produto other = (Produto) obj;
 		if (codigo != other.codigo)
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
 			return false;
 		if (descricao == null) {
 			if (other.descricao != null)

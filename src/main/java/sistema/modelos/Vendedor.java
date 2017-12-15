@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -20,12 +19,13 @@ public class Vendedor implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long codigo;
+	
 	private String nome;
 	private String endereco;
 	private String telefone;
 	
 	@OneToMany(mappedBy="vendedor")
-	private List<Produto> produtos = new ArrayList<Produto>();
+	private List<Pedido> pedidos = new ArrayList<Pedido>();
 	
 	
 	public Vendedor(long codigo, String nome, String endereco, String telefone) {
@@ -64,19 +64,15 @@ public class Vendedor implements Serializable{
 		this.telefone = telefone;
 	}
 
-	public List<Produto> getProdutos() {
-		return produtos;
+	public List<Pedido> getPedidos() {
+		return pedidos;
 	}
-	public void setProdutos(List<Produto> produtos) {
-		this.produtos = produtos;
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
-	
-	public void addProduto(Produto produto)
-	{
-		produtos.add(produto);
-		
+	public void addPedido(Pedido pedido)	{
+		pedidos.add(pedido);
 	}
-	
 
 	@Override
 	public int hashCode() {

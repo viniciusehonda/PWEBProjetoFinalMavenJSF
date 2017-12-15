@@ -2,11 +2,7 @@ package sistema.service;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-
 import sistema.dao.ProdutoDAO;
-import sistema.modelos.Cliente;
 import sistema.modelos.Produto;
 
 public class ProdutoService {
@@ -37,5 +33,5 @@ public class ProdutoService {
 		produtoDAO.remove(produto);
 		produtoDAO.closeEntityManager();
 	}
-
+	
 }

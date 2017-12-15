@@ -8,10 +8,9 @@ import javax.faces.bean.ViewScoped;
 
 import org.primefaces.event.RowEditEvent;
 
-import sistema.modelos.Cliente;
-import sistema.modelos.Vendedor;
+import sistema.modelos.Pedido;
 import sistema.modelos.Produto;
-import sistema.service.VendedorService;
+import sistema.service.PedidoService;
 import sistema.service.ProdutoService;
 
 @ManagedBean(name = "produtoManagedBean")
@@ -23,14 +22,12 @@ public class ProdutoManagedBean  implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private Produto produto = new Produto();
-	private Vendedor vendedor;
+	private Pedido pedido;
 	private ProdutoService prodService = new ProdutoService();
-	private VendedorService vendService = new VendedorService();
+	private PedidoService pedidoService = new PedidoService();
 	private List<Produto> produtos;
 
 	public void salvar() {
-		vendedor.addProduto(produto);
-		produto.setVendedor(vendedor);
 
 		produto = prodService.salvar(produto);
 
@@ -38,17 +35,15 @@ public class ProdutoManagedBean  implements Serializable{
 			produtos.add(produto);
 
 		produto = new Produto();
-		vendedor = null;
 
 	}
 
-	public List<Vendedor> getVendedores() {
-		return vendService.getVendedores();
-
+	public List<Pedido> getVendedores() {
+		return pedidoService.getPedidos();
 	}
 
-	public Vendedor getVendedor() {
-		return vendedor;
+	public Pedido getPedido() {
+		return pedido;
 	}
 
 	public void remove(Produto produto) {
@@ -56,8 +51,8 @@ public class ProdutoManagedBean  implements Serializable{
 		produtos.remove(produto);
 	}
 
-	public void setVendedor(Vendedor vendedor) {
-		this.vendedor = vendedor;
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
 	}
 
 	public Produto getProduto() {

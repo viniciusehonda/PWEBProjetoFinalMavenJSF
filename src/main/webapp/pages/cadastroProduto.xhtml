@@ -18,21 +18,9 @@
  	<h:form id="formProdutos">
 
 		<p:panelGrid columns="2">
-			<p:outputLabel value="#{msg['pages.cadastroProduto.nome']}" />
-			<p:inputText value="#{produtoManagedBean.produto.nome}" />
-		
 			<p:outputLabel value="#{msg['pages.cadastroProduto.descricao']}" />
 			<p:inputText value="#{produtoManagedBean.produto.descricao}" />
-
-			<p:outputLabel value="#{msg['pages.cadastroProduto.vendedor.nome']}" />
-			<p:selectOneMenu value="#{produtoManagedBean.vendedor}"
-				converter="converterVendedor">
-				<f:selectItem itemValue="" itemLabel="#{msg['pages.cadastroProduto.vendedor.msg']}" />
-				<f:selectItems value="#{produtoManagedBean.vendedores}" var="aux"
-					itemValue="#{aux}" itemLabel="#{aux.nome}" />
-			</p:selectOneMenu>
-
-
+			
 			<p:outputLabel value="#{msg['pages.cadastroProduto.valor']}" />
 			<p:inputText value="#{produtoManagedBean.produto.valor}" />
 
@@ -56,18 +44,6 @@
 			<p:column headerText="#{msg['pages.cadastroProduto.codigo']}">
 				<h:outputText value="#{prod.codigo}" />
 			</p:column>
-			
-			<p:column headerText="#{msg['pages.cadastroProduto.nome']}">
-				<p:cellEditor>
-					<f:facet name="output">
-						<p:outputLabel value="#{prod.nome}" />
-					</f:facet>
-					<f:facet name="input">
-						<p:inputText id="nome" value="#{prod.nome}"
-							style="width:100%" />
-					</f:facet>
-				</p:cellEditor>
-			</p:column>
 
 			<p:column headerText="#{msg['pages.cadastroProduto.descricao']}">
 				<p:cellEditor>
@@ -77,24 +53,6 @@
 					<f:facet name="input">
 						<p:inputText id="descricao" value="#{prod.descricao}"
 							style="width:100%" />
-					</f:facet>
-				</p:cellEditor>
-			</p:column>
-
-
-			<p:column headerText="#{msg['pages.cadastroProduto.vendedor.nome']}">
-				<p:cellEditor>
-					<f:facet name="output">
-						<p:outputLabel value="#{prod.vendedor.nome}" />
-					</f:facet>
-					<f:facet name="input">
-						<p:selectOneMenu value="#{prod.vendedor}"
-							converter="converterVendedor" style="width:100%">
-							<f:selectItem itemValue="" itemLabel="#{msg['pages.cadastroProduto.vendedor.msg']}" />
-							<f:selectItems value="#{produtoManagedBean.vendedores}"
-								var="aux" itemValue="#{aux}" itemLabel="#{aux.nome}" />
-						</p:selectOneMenu>
-
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
@@ -111,18 +69,12 @@
 			</p:column>
 
 			<p:column style="width:70px" headerText="#{msg['pages.commus.form.opcoes']}">
-
-
-
 					<p:rowEditor />
 					
 					<p:commandLink id="remover" styleClass="ui-icon ui-icon-trash"
 						style="text-align:center"
 						actionListener="#{produtoManagedBean.remove(prod)}"
 						update=":formTableProdutos" />
-
-
-
 			</p:column>
 		</p:dataTable>
 	</h:form>

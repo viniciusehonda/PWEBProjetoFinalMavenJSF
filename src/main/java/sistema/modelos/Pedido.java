@@ -1,9 +1,14 @@
 package sistema.modelos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Pedido {
@@ -11,9 +16,19 @@ public class Pedido {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
-	private String cliente;
-	private String produto;
-	private String vendedor;
+	private String dataEmissaoPedido;
+	private String dataPagto;
+	private boolean status;
+	
+	@ManyToMany(mappedBy="pedidos")
+	private List<Produto> produtos = new ArrayList<Produto>();
+	
+	@ManyToOne
+	private Cliente cliente;
+	
+	@ManyToOne
+	private Vendedor vendedor;
+	
 	
 	public int getId() {
 		return id;
@@ -21,23 +36,44 @@ public class Pedido {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getCliente() {
+	public String getDataEmissaoPedido() {
+		return dataEmissaoPedido;
+	}
+	public void setDataEmissaoPedido(String dataEmissaoPedido) {
+		this.dataEmissaoPedido = dataEmissaoPedido;
+	}
+	public String getDataPagto() {
+		return dataPagto;
+	}
+	public void setDataPagto(String dataPagto) {
+		this.dataPagto = dataPagto;
+	}
+	public boolean isStatus() {
+		return status;
+	}
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+	public Cliente getCliente() {
 		return cliente;
 	}
-	public void setCliente(String cliente) {
+	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-	public String getProduto() {
-		return produto;
-	}
-	public void setProduto(String produto) {
-		this.produto = produto;
-	}
-	public String getVendedor() {
+	public Vendedor getVendedor() {
 		return vendedor;
 	}
-	public void setVendedor(String vendedor) {
+	public void setVendedor(Vendedor vendedor) {
 		this.vendedor = vendedor;
+	}
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
+	}
+	public void addProduto(Produto produto)	{
+		produtos.add(produto);
 	}
 	
 	@Override
@@ -63,6 +99,6 @@ public class Pedido {
 	
 	@Override
 	public String toString() {
-		return "Cliente [id=" + id + ", cliente=" + cliente + ", produto=" + produto + ", vendedor=" + vendedor + "]";
+		return "Cliente [id=" + id + ", cliente=" + cliente + ", vendedor=" + vendedor + "]";
 	}
 }

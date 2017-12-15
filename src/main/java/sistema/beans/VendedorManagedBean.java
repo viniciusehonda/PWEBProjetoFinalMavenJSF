@@ -10,7 +10,7 @@ import javax.faces.model.DataModel;
 import org.primefaces.event.RowEditEvent;
 import sistema.beans.datamodel.VendedorDataModel;
 import sistema.modelos.Vendedor;
-import sistema.modelos.Produto;
+import sistema.modelos.Pedido;
 import sistema.service.VendedorService;
 
 @ManagedBean
@@ -59,7 +59,7 @@ public class VendedorManagedBean {
 	}
 
 	public void remove(Vendedor vendedor) {
-		if (servico.pesquisarProdutosVendedor(vendedor).size() > 0) {
+		if (servico.pesquisarPedidosVendedor(vendedor).size() > 0) {
 			FacesContext context = FacesContext.getCurrentInstance();
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Não é possível remover vendedor",
 					"Vendedor possui produtos!"));
@@ -73,9 +73,9 @@ public class VendedorManagedBean {
 		this.vendedor = vendedor;
 	}
 
-	public List<Produto> getProdutosVendedor() {
+	public List<Pedido> getProdutosVendedor() {
 		if (vendedorSelecionado != null) {
-			return servico.pesquisarProdutosVendedor(vendedorSelecionado);
+			return servico.pesquisarPedidosVendedor(vendedorSelecionado);
 		} else
 			return null;
 	}

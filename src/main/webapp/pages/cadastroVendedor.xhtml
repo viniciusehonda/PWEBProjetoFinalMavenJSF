@@ -37,13 +37,13 @@
 	    <p:growl id="growl" showDetail="true" />
 	
 		<p:dataTable value="#{vendedorManagedBean.vendedores}" var="v"
-			editable="true" id="tableVendedores"
+			editable="true" id="tableVendedores" paginator = "true" row = "5"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5,10,15"
 			selectionMode="single" selection="#{vendedorManagedBean.vendedorSelecionado}"  rowKey="#{v.codigo}"
 			>
 
-		   <p:ajax event="rowSelect"   update=":formTableVendedores" />
-           <p:ajax event="rowUnselect" update=":formTableVendedores" />
-           <p:ajax event="rowEdit"     listener="#{vendedorManagedBean.onRowEdit}"     update=":formTableVendedores" /> 
+           <p:ajax event="rowEdit"     listener="#{vendedorManagedBean.onRowEdit}"     update="tableVendedores" /> 
 
 			<p:column headerText="#{msg['pages.cadastroVendedor.codigo']}" filterBy="#{v.codigo}">
 				<h:outputText value="#{v.codigo}" />

@@ -40,10 +40,10 @@ public abstract class DAOImpl <T, I extends Serializable> {
 	}
 
 
-	public T getById(Class<T> classe, I pk) {
+	public T getById(Class<T> classe, long l) {
 
 		try {
-			T t = getEntityManager().find(classe, pk);
+			T t = getEntityManager().find(classe, l);
 			getEntityManager().refresh(t);
 			return t;
 		} catch (NoResultException e) {

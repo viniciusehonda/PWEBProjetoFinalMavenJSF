@@ -108,7 +108,7 @@
                 <p:dataExporter type="xls" encoding="iso-8859-1" target="tablePedidos" fileName="#{msg['pages.cadastroVendedor.vendas']}"/>
         </h:commandLink>
 		<p:dataTable value="#{vendedorManagedBean.pedidosVendedor}" var="ped"	id="tablePedidos"
-			rowKey="#{ped.id}"
+			rowKey="#{ped.codigo}"
 			paginator="true"
             rows="5"
             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"

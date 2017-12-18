@@ -78,12 +78,14 @@ public class Vendedor implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + (int) (codigo ^ (codigo >>> 32));
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
-		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
+		//long temp;
+		//temp = Double.doubleToLongBits(valor);
+		//result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -93,21 +95,15 @@ public class Vendedor implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Vendedor other = (Vendedor) obj;
+		if (codigo != other.codigo)
+			return false;
 		if (nome == null) {
 			if (other.nome != null)
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
-		if (endereco == null) {
-			if (other.endereco != null)
-				return false;
-		} else if (!endereco.equals(other.endereco))
-			return false;
-		if (telefone == null) {
-			if (other.telefone != null)
-				return false;
-		} else if (!telefone.equals(other.telefone))
-			return false;
+		//if (Double.doubleToLongBits(valor) != Double.doubleToLongBits(other.valor))
+			//return false;
 		return true;
 	}
 

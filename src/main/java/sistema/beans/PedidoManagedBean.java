@@ -157,7 +157,7 @@ public class PedidoManagedBean {
 		  
 	  }
 	
-	public void remover(Pedido pedido) {
+	public void remove(Pedido pedido) {
 		service.remover(pedido);
 		pedidos.remove(pedido);
 

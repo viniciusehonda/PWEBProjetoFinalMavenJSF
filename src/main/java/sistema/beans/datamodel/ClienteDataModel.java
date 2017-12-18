@@ -27,7 +27,7 @@ public class ClienteDataModel extends ListDataModel<Cliente> implements Selectab
 	public Cliente getRowData(String rowKey) {
 		
 		for(Cliente c: servico.getClientes())
-		   if(Integer.parseInt(rowKey) ==  c.getId())
+		   if(Integer.parseInt(rowKey) ==  c.getCodigo())
 			   return servico.pesquisar(c);
 		
 		return null;
@@ -35,7 +35,7 @@ public class ClienteDataModel extends ListDataModel<Cliente> implements Selectab
 
 	@Override
 	public Object getRowKey(Cliente cliente) {
-		return cliente.getId();
+		return cliente.getCodigo();
 	}
 	
 }

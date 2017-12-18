@@ -27,7 +27,7 @@ public class PedidoDataModel extends ListDataModel<Pedido> implements Selectable
 	public Pedido getRowData(String rowKey) {
 		
 		for(Pedido p: servico.getPedidos())
-		   if(Integer.parseInt(rowKey) ==  p.getId())
+		   if(Integer.parseInt(rowKey) ==  p.getCodigo())
 			   return servico.pesquisar(p);
 		
 		return null;
@@ -35,7 +35,7 @@ public class PedidoDataModel extends ListDataModel<Pedido> implements Selectable
 
 	@Override
 	public Object getRowKey(Pedido pedido) {
-		return pedido.getId();
+		return pedido.getCodigo();
 	}
 	
 }

@@ -35,13 +35,13 @@ public class ClienteService {
 	
 	public void remover(Cliente cliente) {
 		
-		cliente = clienteDAO.getById(Cliente.class, cliente.getId());
+		cliente = clienteDAO.getById(Cliente.class, cliente.getCodigo());
 		clienteDAO.remove(cliente);
 		clienteDAO.closeEntityManager();
 	}
 	public Cliente pesquisar(Cliente cliente) {
 
-		cliente = clienteDAO.getById(Cliente.class, cliente.getId());
+		cliente = clienteDAO.getById(Cliente.class, cliente.getCodigo());
 		clienteDAO.closeEntityManager();
 		return cliente;
 	}
@@ -49,7 +49,7 @@ public class ClienteService {
 	public List<Pedido> pesquisarPedidosCliente(Cliente cliente) {
 
 		List<Pedido> pedidos;
-		cliente = clienteDAO.getById(Cliente.class, cliente.getId());
+		cliente = clienteDAO.getById(Cliente.class, cliente.getCodigo());
 		pedidos = cliente.getPedidos();
 		return pedidos;
 	}

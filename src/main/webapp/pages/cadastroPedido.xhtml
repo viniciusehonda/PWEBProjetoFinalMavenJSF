@@ -49,15 +49,15 @@
 	
 		<p:dataTable value="#{pedidoManagedBean.pedidos}" var="p"
 			editable="true" id="tablePedidos"
-			selectionMode="single" selection="#{pedidoManagedBean.pedidoSelecionado}"  rowKey="#{p.id}"
+			selectionMode="single" selection="#{pedidoManagedBean.pedidoSelecionado}"  rowKey="#{p.codigo}"
 			>
 
-		   <p:ajax event="rowSelect"   update=":formTablePedidos" />
-           <p:ajax event="rowUnselect" update=":formTablePedidos" />
-           <p:ajax event="rowEdit"     listener="#{pedidoManagedBean.onRowEdit}"     update=":formTablePedidos" /> 
+		   <p:ajax event="rowSelect"   update=":formTableProdutos" />
+           <p:ajax event="rowUnselect" update=":formTableProdutos" />
+           <p:ajax event="rowEdit"     listener="#{fornecedorManagedBean.onRowEdit}"     update=":formTableProdutos" />  
 
-			<p:column headerText="#{msg['pages.cadastroPedido.id']}" filterBy="#{p.id}">
-				<h:outputText value="#{p.id}" />
+			<p:column headerText="#{msg['pages.cadastroPedido.id']}" filterBy="#{p.codigo}">
+				<h:outputText value="#{p.codigo}" />
 			</p:column>
 
 			<p:column headerText="#{msg['pages.cadastroPedido.dataEmissaoPedido']}" filterBy="#{p.dataEmissaoPedido}">
@@ -143,7 +143,7 @@
 					<p:rowEditor />
 					<p:commandLink id="remover" styleClass="ui-icon ui-icon-trash"
 						style="text-align:center"
-						actionListener="#{pedidoManagedBean.remover(p)}"
+						actionListener="#{pedidoManagedBean.remove(p)}"
 						update=":formTablePedidos" />
 			</p:column>
 
@@ -160,36 +160,19 @@
         		<p:commandButton value="#{msg['pages.comuns.form.btnSalvar']}" action="#{pedidoManagedBean.associar}" onclick="dlgAddProduto.hide();"/>
         		</h:form>	
     	</p:dialog>
-    
     <h:form id="formTableProdutos">
-	    <h3><p:outputLabel value="#{msg['pages.cadastroPedido.produtosPedido']}: #{pedidoManagedBean.pedidoSelecionado.id}" /></h3>
-	    <h:commandLink>
-                <p:graphicImage name="/sistema/iconesimg/iconepdf.png" width="24"/>
-                <p:dataExporter type="pdf" encoding="iso-8859-1" target="tableProdutos" fileName="#{msg['pages.cadastroPedido.produtos']}"/>
-        </h:commandLink>
-        <h:commandLink>
-                <p:graphicImage name="/sistema/iconesimg/iconeexcel.png" width="24"/>
-                <p:dataExporter type="xls" encoding="iso-8859-1" target="tableProdutos" fileName="#{msg['pages.cadastroPedido.produtos']}"/>
-        </h:commandLink>
-		<p:dataTable value="#{pedidoManagedBean.produtosPedido}" var="prod"	id="tableProdutos"
-			rowKey="#{prod.codigo}"
-			paginator="true"
-            rows="5"
-            paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-            rowsPerPageTemplate="5,10,15"
-                
-            emptyMessage="#{msg['pages.cadastroPedido.filterMSG']}"
-		>
+	    <h3><p:outputLabel value="#{msg['pages.cadastroPedido.produtosPedido']}: #{pedidoManagedBean.pedidoSelecionado.codigo}" /></h3>
+		<p:dataTable value="#{pedidoManagedBean.produtosPedido}" var="prod"	id="tableProdutos">
 
-			<p:column headerText="#{msg['pages.cadastroPedido.produto.codigo']}" filterBy="#{prod.codigo}" exportable="false">
+			<p:column headerText="#{msg['pages.cadastroPedido.produto.codigo']}">
 				<h:outputText value="#{prod.codigo}" />
 			</p:column>
-			
-			<p:column headerText="#{msg['pages.cadastroPedido.produto.descricao']}" filterBy="#{prod.descricao}">
+
+			<p:column headerText="#{msg['pages.cadastroPedido.produto.descricao']}">
 						<p:outputLabel value="#{prod.descricao}" />
 			</p:column>
 
-			<p:column headerText="#{msg['pages.cadastroPedido.produto.valor']}" filterBy="#{prod.valor}">
+			<p:column headerText="#{msg['pages.cadastroPedido.produto.valor']}">
 				<h:outputText value="#{prod.valor}" />
 			</p:column>
 

@@ -48,14 +48,14 @@
 				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				rowsPerPageTemplate="5,10,15"
 				emptyMessage="#{msg['pages.cadastroCliente.filterMSG']}"
-				selectionMode="single" selection="#{clienteManagedBean.clienteSelecionado}"  rowKey="#{aux.id}">
+				selectionMode="single" selection="#{clienteManagedBean.clienteSelecionado}"  rowKey="#{aux.codigo}">
 
 				<p:ajax event="rowEdit" listener="#{clienteManagedBean.onRowEdit}"
-					update="tabelaCliente" />
+					update="formTablePedidos" />
 
 				<p:column headerText="#{msg['pages.cadastroCliente.id']}"
-					filterBy="#{aux.id}">
-					<p:outputLabel value="#{aux.id}" />
+					filterBy="#{aux.codigo}">
+					<p:outputLabel value="#{aux.codigo}" />
 				</p:column>
 
 
@@ -128,7 +128,7 @@
 				</p:column>
 			</p:dataTable>
 		</h:form>
-<h:form id="formTablePedidos">
+	<h:form id="formTablePedidos">
 	    <h3><p:outputLabel value="#{msg['pages.cadastroCliente.pedidosCliente']}: #{clienteManagedBean.clienteSelecionado.nome}" /></h3>
 	    <h:commandLink>
                 <p:graphicImage name="/sistema/iconesimg/iconepdf.png" width="24"/>
@@ -139,33 +139,24 @@
                 <p:dataExporter type="xls" encoding="iso-8859-1" target="tablePedidos" fileName="#{msg['pages.cadastroCliente.vendas']}"/>
         </h:commandLink>
 		
-		<p:dataTable value="#{clienteManagedBean.pedidosCliente}" var="ped"	id="tablePedidos"
-			rowKey="#{ped.id}"
-			paginator="true"
-            rows="5"
-            paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-            rowsPerPageTemplate="5,10,15"
-                
-            emptyMessage="#{msg['pages.cadastroCliente.filterMSG']}"
-		>
+		<h:form id="formTablePedidos">
+	    <h3><p:outputLabel value="#{msg['pages.cadastroCliente.pedidosCliente']}: #{clienteManagedBean.clienteSelecionado.codigo}" /></h3>
+		<p:dataTable value="#{clienteManagedBean.pedidosCliente}" var="ped"	id="tableClientes">
 
-			<p:column headerText="#{msg['pages.cadastroCliente.pedido.id']}" filterBy="#{ped.codigo}" exportable="false">
+			<p:column headerText="#{msg['pages.cadastroCliente.pedido.dataEmissaoPedido']}">
 				<h:outputText value="#{ped.codigo}" />
 			</p:column>
-			
-			<p:column headerText="#{msg['pages.cadastroCliente.pedido.dataEmissaoPedido']}" filterBy="#{ped.dataEmissaoPedido}">
-						<p:outputLabel value="#{ped.dataEmissaoPedido}" />
+
+			<p:column headerText="#{msg['pages.cadastroCliente.pedido.dataPagto']}">
+						<p:outputLabel value="#{ped.descricao}" />
 			</p:column>
 
-			<p:column headerText="#{msg['pages.cadastroCliente.pedido.dataPagto']}" filterBy="#{ped.dataPagto}">
-						<p:outputLabel value="#{ped.dataPagto}" />
-			</p:column>
-
-			<p:column headerText="#{msg['pages.cadastroCliente.pedido.status']}" filterBy="#{ped.status}">
-				<h:outputText value="#{ped.status}" />
+			<p:column headerText="#{msg['pages.cadastroCliente.pedido.status']}">
+				<h:outputText value="#{ped.valor}" />
 			</p:column>
 
 		</p:dataTable>
+		</h:form>
 	</h:form>
 	</ui:define>
 </ui:composition>

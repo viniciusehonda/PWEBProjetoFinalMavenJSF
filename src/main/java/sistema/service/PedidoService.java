@@ -38,20 +38,20 @@ PedidoDAO pedidoDAO = new PedidoDAO();
 	
 	public void remover(Pedido pedido) {
 		
-		pedido = pedidoDAO.getById(Pedido.class, pedido.getId());
+		pedido = pedidoDAO.getById(Pedido.class, pedido.getCodigo());
 		pedidoDAO.remove(pedido);
 		pedidoDAO.closeEntityManager();
 	}
 	public List<Produto> pesquisarProdutosPedido(Pedido pedido) {
 
 		List<Produto> produtos;
-		pedido = pedidoDAO.getById(Pedido.class, pedido.getId());
+		pedido = pedidoDAO.getById(Pedido.class, pedido.getCodigo());
 		produtos = pedido.getProdutos();
 		return produtos;
 	}
 	public Pedido pesquisar(Pedido pedido) {
 
-		pedido = pedidoDAO.getById(Pedido.class, pedido.getId());
+		pedido = pedidoDAO.getById(Pedido.class, pedido.getCodigo());
 		pedidoDAO.closeEntityManager();
 		return pedido;
 	}

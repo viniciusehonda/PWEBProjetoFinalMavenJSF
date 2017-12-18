@@ -21,7 +21,7 @@ public class Cliente implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private long codigo;
 	
 	private String nome;
 	private String endereco;
@@ -31,9 +31,9 @@ public class Cliente implements Serializable{
 	@OneToMany(mappedBy="cliente")
 	private List<Pedido> pedidos = new ArrayList<Pedido>();
 	
-	public Cliente(int id, String nome, String endereco, String cpf_cnpj, String telefone) {
+	public Cliente(long codigo, String nome, String endereco, String cpf_cnpj, String telefone) {
 		super();
-		this.id = id;
+		this.codigo = codigo;
 		this.nome = nome;
 		this.endereco = endereco;
 		this.cpf_cnpj = cpf_cnpj;
@@ -42,12 +42,15 @@ public class Cliente implements Serializable{
 	
 	public Cliente() {
 	}
-	public int getId() {
-		return id;
+	
+	public long getCodigo() {
+		return codigo;
 	}
-	public void setId(int id) {
-		this.id = id;
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
 	}
+
 	public String getNome() {
 		return nome;
 	}
@@ -86,9 +89,14 @@ public class Cliente implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + (int) (codigo ^ (codigo >>> 32));
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		//long temp;
+		//temp = Double.doubleToLongBits(valor);
+		//result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -98,14 +106,21 @@ public class Cliente implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Cliente other = (Cliente) obj;
-		if (id != other.id)
+		if (codigo != other.codigo)
 			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		//if (Double.doubleToLongBits(valor) != Double.doubleToLongBits(other.valor))
+			//return false;
 		return true;
 	}
 	
 	@Override
 	public String toString() {
-		return "Cliente [id=" + id + ", nome=" + nome + ", endereco=" + endereco + ", cpf_cnpj=" + cpf_cnpj + ", telefone=" + telefone + "]";
+		return "Cliente [codigo=" + codigo + ", nome=" + nome + ", endereco=" + endereco + ", cpf_cnpj=" + cpf_cnpj + ", telefone=" + telefone + "]";
 	}
 	
 	

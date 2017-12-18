@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 public class Pedido {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private long codigo;
 	
 	private String dataEmissaoPedido;
 	private String dataPagto;
@@ -29,12 +29,11 @@ public class Pedido {
 	@ManyToOne
 	private Vendedor vendedor;
 	
-	
-	public int getId() {
-		return id;
+	public long getCodigo() {
+		return codigo;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
 	}
 	public String getDataEmissaoPedido() {
 		return dataEmissaoPedido;
@@ -80,7 +79,11 @@ public class Pedido {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + (int) (codigo ^ (codigo >>> 32));
+		result = prime * result + ((dataEmissaoPedido == null) ? 0 : dataEmissaoPedido.hashCode());
+		long temp;
+		//temp = Double.doubleToLongBits(valor);
+		//result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
 	@Override
@@ -92,13 +95,13 @@ public class Pedido {
 		if (getClass() != obj.getClass())
 			return false;
 		Pedido other = (Pedido) obj;
-		if (id != other.id)
+		if (codigo != other.codigo)
 			return false;
 		return true;
 	}
 	
 	@Override
 	public String toString() {
-		return "Cliente [id=" + id + ", cliente=" + cliente + ", vendedor=" + vendedor + "]";
+		return "Cliente [codigo=" + codigo + ", cliente=" + cliente.getNome() + ", vendedor=" + vendedor.getNome() + "]";
 	}
 }

@@ -41,11 +41,11 @@
 
             <p:ajax event="rowEdit" listener="#{produtoManagedBean.onRowEdit}" update="tableProdutos"/>
 
-			<p:column headerText="#{msg['pages.cadastroProduto.codigo']}">
+			<p:column headerText="#{msg['pages.cadastroProduto.codigo']}" filterBy="#{prod.codigo}">
 				<h:outputText value="#{prod.codigo}" />
 			</p:column>
 
-			<p:column headerText="#{msg['pages.cadastroProduto.descricao']}">
+			<p:column headerText="#{msg['pages.cadastroProduto.descricao']}" filterBy="#{prod.descricao}">
 				<p:cellEditor>
 					<f:facet name="output">
 						<p:outputLabel value="#{prod.descricao}" />
@@ -57,7 +57,7 @@
 				</p:cellEditor>
 			</p:column>
 
-			<p:column headerText="#{msg['pages.cadastroProduto.valor']}">
+			<p:column headerText="#{msg['pages.cadastroProduto.valor']}" filterBy="#{prod.valor}">
 				  <p:cellEditor>
 					<f:facet name="output">
 						<p:outputLabel value="#{prod.valor}" />

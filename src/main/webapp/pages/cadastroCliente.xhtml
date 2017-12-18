@@ -52,9 +52,11 @@
 
 				<p:ajax event="rowEdit" listener="#{clienteManagedBean.onRowEdit}"
 					update="formTablePedidos" />
+				<p:ajax event="rowSelect"  update=":formTablePedidos"/>
+           		<p:ajax event="rowUnselect" update = ":formTablePedidos"/>	
 
 				<p:column headerText="#{msg['pages.cadastroCliente.id']}"
-					filterBy="#{aux.codigo}">
+					filterBy="#{aux.codigo}" exportable="false">
 					<p:outputLabel value="#{aux.codigo}" />
 				</p:column>
 
@@ -117,7 +119,7 @@
 				</p:column>
 
 				<p:column style="width:70px"
-					headerText="#{msg['pages.cadastroCliente.optionTable']}">
+					headerText="#{msg['pages.cadastroCliente.optionTable']}" exportable="false">
 
 					<p:rowEditor />
 
@@ -132,31 +134,29 @@
 	    <h3><p:outputLabel value="#{msg['pages.cadastroCliente.pedidosCliente']}: #{clienteManagedBean.clienteSelecionado.nome}" /></h3>
 	    <h:commandLink>
                 <p:graphicImage name="/sistema/iconesimg/iconepdf.png" width="24"/>
-                <p:dataExporter type="pdf" encoding="iso-8859-1" target="tablePedidos" fileName="#{msg['pages.cadastroCliente.vendas']}"/>
+                <p:dataExporter type="pdf" encoding="iso-8859-1" target="tableClientes" fileName="#{msg['pages.cadastroCliente.vendas']}"/>
         </h:commandLink>
         <h:commandLink>
                 <p:graphicImage name="/sistema/iconesimg/iconeexcel.png" width="24"/>
-                <p:dataExporter type="xls" encoding="iso-8859-1" target="tablePedidos" fileName="#{msg['pages.cadastroCliente.vendas']}"/>
+                <p:dataExporter type="xls" encoding="iso-8859-1" target="tableClientes" fileName="#{msg['pages.cadastroCliente.vendas']}"/>
         </h:commandLink>
 		
-		<h:form id="formTablePedidos">
 	    <h3><p:outputLabel value="#{msg['pages.cadastroCliente.pedidosCliente']}: #{clienteManagedBean.clienteSelecionado.codigo}" /></h3>
 		<p:dataTable value="#{clienteManagedBean.pedidosCliente}" var="ped"	id="tableClientes">
 
 			<p:column headerText="#{msg['pages.cadastroCliente.pedido.dataEmissaoPedido']}">
-				<h:outputText value="#{ped.codigo}" />
+				<h:outputText value="#{ped.dataEmissaoPedido}" />
 			</p:column>
 
 			<p:column headerText="#{msg['pages.cadastroCliente.pedido.dataPagto']}">
-						<p:outputLabel value="#{ped.descricao}" />
+						<p:outputLabel value="#{ped.dataPagto}" />
 			</p:column>
 
 			<p:column headerText="#{msg['pages.cadastroCliente.pedido.status']}">
-				<h:outputText value="#{ped.valor}" />
+				<h:outputText value="#{ped.status}" />
 			</p:column>
 
 		</p:dataTable>
-		</h:form>
 	</h:form>
 	</ui:define>
 </ui:composition>

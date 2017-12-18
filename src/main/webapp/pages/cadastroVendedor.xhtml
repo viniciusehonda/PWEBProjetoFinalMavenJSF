@@ -44,7 +44,8 @@
 			>
 
            <p:ajax event="rowEdit"     listener="#{vendedorManagedBean.onRowEdit}"     update="tableVendedores" /> 
-
+           <p:ajax event="rowSelect"  update=":formTablePedidos"/>
+           <p:ajax event="rowUnselect" update = ":formTablePedidos"/>
 			<p:column headerText="#{msg['pages.cadastroVendedor.codigo']}" filterBy="#{v.codigo}">
 				<h:outputText value="#{v.codigo}" />
 			</p:column>

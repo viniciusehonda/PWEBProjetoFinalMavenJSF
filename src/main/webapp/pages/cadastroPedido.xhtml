@@ -36,8 +36,13 @@
 			<p:inputText  value="#{pedidoManagedBean.pedido.dataEmissaoPedido}"/>
 			<p:outputLabel value="#{msg['pages.cadastroPedido.dataPagto']}" />
 			<p:inputText  value="#{pedidoManagedBean.pedido.dataPagto}"/>
+			
 			<p:outputLabel value="#{msg['pages.cadastroPedido.status']}" />
-			<p:inputText  value="#{pedidoManagedBean.pedido.status}"/>
+			<p:selectOneRadio id="status" value="#{pedidoManagedBean.pedido.status}">
+			<f:selectItem itemLabel="Pago" itemValue="true" />
+			<f:selectItem itemLabel="Pendente" itemValue="false" />
+        	</p:selectOneRadio>
+			
 		</p:panelGrid>
 		<p:commandButton value="#{msg['pages.comuns.form.btnSalvar']}" update=":formPedidos, :formTablePedidos"  action="#{pedidoManagedBean.salvar}"/>
 	</h:form>
@@ -52,9 +57,9 @@
 			selectionMode="single" selection="#{pedidoManagedBean.pedidoSelecionado}"  rowKey="#{p.codigo}"
 			>
 
-		   <p:ajax event="rowSelect"   update=":formTableProdutos" />
+		   <p:ajax event="rowSelect"   update=":formTableProdutos:tableProdutos"/>
            <p:ajax event="rowUnselect" update=":formTableProdutos" />
-           <p:ajax event="rowEdit"     listener="#{fornecedorManagedBean.onRowEdit}"     update=":formTableProdutos" />  
+           <p:ajax event="rowEdit"     listener="#{pedidoManagedBean.onRowEdit}"     update=":formTableProdutos" />  
 
 			<p:column headerText="#{msg['pages.cadastroPedido.id']}" filterBy="#{p.codigo}">
 				<h:outputText value="#{p.codigo}" />
@@ -90,8 +95,10 @@
 						<p:outputLabel value="#{p.status}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText id="status" value="#{p.status}"
-							style="width:100%" />
+						<p:selectOneRadio id="status" value="#{pedidoManagedBean.pedido.status}">
+					<f:selectItem itemLabel="Pago" itemValue="true" />
+					<f:selectItem itemLabel="Pendente" itemValue="false" />
+		        	</p:selectOneRadio>
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
